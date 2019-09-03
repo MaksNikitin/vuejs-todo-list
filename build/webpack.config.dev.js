@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-const webpack = require('webpack');
-const { VueLoaderPlugin } = require('vue-loader');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
+const webpack = require('webpack')
+const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -12,6 +12,10 @@ function resolve (dir) {
 
 module.exports = {
   mode: 'development',
+  entry: './src/index.ts',
+  output: {
+    filename: './dist/bundle.js'
+  },
   devServer: {
     hot: true,
     watchOptions: {
@@ -32,8 +36,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.js$/,
-        use: 'babel-loader'
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.(js|vue)$/,
@@ -41,6 +49,12 @@ module.exports = {
         enforce: 'pre'
       }
     ]
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['.ts', '.js', '.vue', '.json']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
