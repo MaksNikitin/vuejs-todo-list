@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const path = require('path')
 
 function resolve (dir) {
@@ -29,6 +30,18 @@ module.exports = {
         use: 'vue-loader'
       },
       {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
+      },
+      {
         test: /\.s(c|a)ss$/,
         use: [
           'vue-style-loader',
@@ -44,12 +57,11 @@ module.exports = {
         ]
       },
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.(js|vue)$/,
@@ -64,6 +76,7 @@ module.exports = {
     },
     extensions: ['.ts', '.js', '.vue', '.json']
   },
+  devtool: '#eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
@@ -76,6 +89,7 @@ module.exports = {
       from: resolve('static/img'),
       to: resolve('dist/static/img'),
       toType: 'dir'
-    }])
+    }]),
+    new VuetifyLoaderPlugin()
   ]
 }
