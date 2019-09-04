@@ -1,0 +1,5 @@
+[
+  { "value": "test", "isChecked": "true" },
+  { "value": "test1", "isChecked": "false" },
+  { "value": "test2", "isChecked": "true" }
+]

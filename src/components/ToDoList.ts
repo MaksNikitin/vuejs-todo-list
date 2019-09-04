@@ -42,6 +42,10 @@ export default class ToDoList extends Vue {
   selectedItem: ToDoModel = null;
   selectedItemIndex: number = -1;
 
+  mounted () {
+    this.$store.dispatch('getToDos');
+  }
+
   get toDos (): Array<ToDoModel> {
     return this.$store.state.toDoModule.toDos;
   }
