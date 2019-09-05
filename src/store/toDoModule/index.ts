@@ -9,26 +9,26 @@ export default {
   },
 
   mutations: {
-    [mutationTypes.ADD_TODO] (state: any, todoModel: ToDoModel) {
+    [mutationTypes.ADD_TODO](state: any, todoModel: ToDoModel) {
       state.toDos.push(todoModel);
     },
-    [mutationTypes.REMOVE_TODO] (state: any, index: number) {
+    [mutationTypes.REMOVE_TODO](state: any, index: number) {
       state.toDos.splice(index, 1);
     },
-    [mutationTypes.UPDATE_TODO] (state: any, { index, item }: { index: number, item: ToDoModel }) {
+    [mutationTypes.UPDATE_TODO](state: any, { index, item }: { index: number, item: ToDoModel }) {
       state.toDos[index].value = item.value;
       state.toDos[index].isChecked = item.isChecked;
     },
-    [mutationTypes.GET_TODOS_REQUEST] (state: any) {
+    [mutationTypes.GET_TODOS_REQUEST](state: any) {
       state.toDos = [];
       state.isLoading = true;
       state.isFetchFailed = false;
     },
-    [mutationTypes.GET_TODOS_SUCCESS] (state: any, todos: Array<ToDoModel>) {
+    [mutationTypes.GET_TODOS_SUCCESS](state: any, todos: Array<ToDoModel>) {
       state.toDos = todos;
       state.isLoading = false;
     },
-    [mutationTypes.GET_TODOS_FAILURE] (state: any) {
+    [mutationTypes.GET_TODOS_FAILURE](state: any) {
       state.isLoading = false;
       state.isFetchFailed = true;
     },
@@ -45,6 +45,6 @@ export default {
       } catch (err) {
         context.commit(mutationTypes.GET_TODOS_FAILURE);
       }
-    }
-  }
-}
+    },
+  },
+};

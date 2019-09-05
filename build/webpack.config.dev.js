@@ -5,6 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+const TSLintPlugin = require('tslint-webpack-plugin')
 const path = require('path')
 
 function resolve (dir) {
@@ -90,6 +91,9 @@ module.exports = {
       to: resolve('dist/static/img'),
       toType: 'dir'
     }]),
-    new VuetifyLoaderPlugin()
+    new VuetifyLoaderPlugin(),
+    new TSLintPlugin({
+      files: ['./src/**/*.ts']
+    })
   ]
 }

@@ -1,6 +1,6 @@
-import Vue from 'vue'
+import { Vue } from "vue-property-decorator";
 
-import App from './App'
+import App from './components/App/App.vue';
 import vuetify from './plugins/vuetify';
 import store from './store';
 
@@ -9,4 +9,4 @@ new Vue({
   components: { App },
   vuetify,
   store,
-}).$mount('#app')
+}).$mount('#app');

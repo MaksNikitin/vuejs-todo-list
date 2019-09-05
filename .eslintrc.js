@@ -8,5 +8,8 @@ module.exports = {
   ],
   plugins: [
     'vue'
-  ]
+  ],
+  rules: {
+    "no-trailing-spaces": 0
+  }
 }

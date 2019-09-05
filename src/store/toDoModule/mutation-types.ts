@@ -12,4 +12,4 @@ export default {
   GET_TODOS_REQUEST,
   GET_TODOS_SUCCESS,
   GET_TODOS_FAILURE,
-}
+};

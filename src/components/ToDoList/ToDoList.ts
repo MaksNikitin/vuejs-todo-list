@@ -1,52 +1,26 @@
 import { Vue, Component } from "vue-property-decorator";
 
-import ToDoItem from './ToDoItem';
-import UpdateDialog from './UpdateDialog';
-import toDoMutationTypes from '../store/toDoModule/mutation-types';
-import ToDoModel from '../models/ToDoModel';
+import ToDoItem from '../ToDoItem/ToDoItem.vue';
+import UpdateDialog from '../UpdateDialog/UpdateDialog.vue';
+import toDoMutationTypes from '../../store/toDoModule/mutation-types';
+import ToDoModel from '../../models/ToDoModel';
 
 @Component({
   components: {
     ToDoItem,
     UpdateDialog,
   },
-  template: `
-    <v-content>
-      <div style="justify-content: center; display: flex; padding-bottom: 20px;">
-        <v-btn @click="addToDo">
-          Add New Todo
-        </v-btn>
-      </div>
-
-      <to-do-item
-        v-for="(toDo, index) in toDos"
-        :key="index"
-        :value="toDo.value"
-        :isChecked="toDo.isChecked"
-        @delete="deleteToDo"
-        @update="updateToDo"
-      />
-
-      <update-dialog
-        v-if="selectedItem"
-        :title="selectedItemIndex >= 0 ? 'Update ToDo Value' : 'Add ToDo Value'"
-        :value="selectedItem"
-        :isDialogVisible="isDialogVisible"
-        @close="closeDialog"
-      />
-    </v-content>
-  `
 })
 export default class ToDoList extends Vue {
   isDialogVisible: boolean = false;
   selectedItem: ToDoModel = null;
   selectedItemIndex: number = -1;
 
-  mounted () {
+  mounted() {
     this.$store.dispatch('getToDos');
   }
 
-  get toDos (): Array<ToDoModel> {
+  get toDos(): Array<ToDoModel> {
     return this.$store.state.toDoModule.toDos;
   }
 
