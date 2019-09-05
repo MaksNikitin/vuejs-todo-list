@@ -43,3 +43,5 @@
     </v-card>
   </v-dialog>
 </template>
+
+<script lang="ts" src="./UpdateDialog.ts" />

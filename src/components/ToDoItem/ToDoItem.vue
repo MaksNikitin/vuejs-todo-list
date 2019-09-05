@@ -16,3 +16,5 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<script lang="ts" src="./ToDoItem.ts" />

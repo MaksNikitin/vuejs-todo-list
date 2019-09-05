@@ -6,7 +6,7 @@ import ToDoModel from '../../models/ToDoModel';
 export default class ToDoList extends Vue {
   @Prop() title!: string;
   @PropSync('value', { type: Object }) formValue!: ToDoModel;
-  @PropSync('isDialogVisible', { type: Boolean}) isDialogFormVisible!: boolean;
+  @PropSync('isDialogVisible', { type: Boolean }) isDialogFormVisible!: boolean;
 
   isValid: boolean = true;
   valueRules: any = [
