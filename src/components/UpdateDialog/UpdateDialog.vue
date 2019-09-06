@@ -36,15 +36,15 @@
 
       <v-card-actions>
         <v-btn 
+          color="primary"
           :disabled="!isValid"
           @click="saveChanges"
-          color="primary"
         >
           Save
         </v-btn>
         <v-btn
-          @click="discardChanges"
           color="secondary"
+          @click="discardChanges"
         >
           Cancel
         </v-btn>

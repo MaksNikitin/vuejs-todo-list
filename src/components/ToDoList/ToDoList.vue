@@ -14,7 +14,10 @@
       <v-list-item class="d-flex justify-space-between">
         <div>{{ activeToDos.length }} items left</div>
         <div class="pb-3 pt-3">
-          <v-btn-toggle v-model="filterValue" color="primary">
+          <v-btn-toggle
+            v-model="filterValue"
+            color="primary"
+          >
             <v-btn class="mr-3 ml-3 toggle-btn">
               ALL
             </v-btn>
