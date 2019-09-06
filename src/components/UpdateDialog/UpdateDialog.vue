@@ -35,13 +35,17 @@
       <v-divider />
 
       <v-card-actions>
-        <v-btn
+        <v-btn 
           :disabled="!isValid"
           @click="saveChanges"
+          color="primary"
         >
           Save
         </v-btn>
-        <v-btn @click="discardChanges">
+        <v-btn
+          @click="discardChanges"
+          color="secondary"
+        >
           Cancel
         </v-btn>
       </v-card-actions>
