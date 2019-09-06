@@ -1,6 +1,6 @@
 import { Vue, Component, Prop, PropSync } from "vue-property-decorator";
 
-import ToDoModel from '../../models/ToDoModel';
+import ToDoModel from '../../models/toDoModel';
 
 @Component
 export default class ToDoList extends Vue {
@@ -8,13 +8,15 @@ export default class ToDoList extends Vue {
   @PropSync('value', { type: Object }) formValue!: ToDoModel;
   @PropSync('isDialogVisible', { type: Boolean }) isDialogFormVisible!: boolean;
 
-  isValid: boolean = true;
+  isValid: boolean = false;
   valueRules: any = [
     (v: string) => !!v || 'Value is required',
   ];
 
   saveChanges() {
-    this.$emit('close', true);
+    if ((this.$refs.form as Vue & { validate: () => boolean }).validate()) {
+      this.$emit('close', true);
+    }
   }
 
   discardChanges() {

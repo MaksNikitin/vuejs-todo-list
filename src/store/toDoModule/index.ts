@@ -1,9 +1,12 @@
-import ToDoModel from "../../models/ToDoModel";
+import ToDoModel from "../../models/toDoModel";
 import mutationTypes from './mutation-types';
+import LocalStorageService from '../../services/localStorageService';
+import { ToDosFilter } from "../../enums/toDosFilter";
 
 export default {
   state: {
     toDos: new Array<ToDoModel>(),
+    selectedFilterValue: ToDosFilter.ALL,
     isLoading: false,
     isFetchFailed: false,
   },
@@ -32,6 +35,9 @@ export default {
       state.isLoading = false;
       state.isFetchFailed = true;
     },
+    [mutationTypes.CHANGE_FILTER](state: any, filterValue: ToDosFilter) {
+      state.selectedFilterValue  = filterValue;
+    },
   },
 
   actions: {
@@ -39,12 +45,31 @@ export default {
       context.commit(mutationTypes.GET_TODOS_REQUEST);
 
       try {
-        const response = await fetch('./data/todos.json');
-        const payload = await response.json();
-        context.commit(mutationTypes.GET_TODOS_SUCCESS, payload);
+        const todos = LocalStorageService.get('todos');
+
+        if (todos && todos.length) {
+          context.commit(mutationTypes.GET_TODOS_SUCCESS, todos);
+        } else {
+          const response = await fetch('./data/todos.json');
+          const payload = await response.json();
+          LocalStorageService.add('todos', payload);
+          context.commit(mutationTypes.GET_TODOS_SUCCESS, payload);
+        }
       } catch (err) {
         context.commit(mutationTypes.GET_TODOS_FAILURE);
       }
+    },
+    addToDo(context: any, todoModel: ToDoModel) {
+      context.commit(mutationTypes.ADD_TODO, todoModel);
+      LocalStorageService.add('todos', context.state.toDos);
+    },
+    removeToDo(context: any, index: number) {
+      context.commit(mutationTypes.REMOVE_TODO, index);
+      LocalStorageService.add('todos', context.state.toDos);
+    },
+    updateToDo(context: any, { index, item }: { index: number, item: ToDoModel }) {
+      context.commit(mutationTypes.UPDATE_TODO, { index, item });
+      LocalStorageService.add('todos', context.state.toDos);
     },
   },
 };

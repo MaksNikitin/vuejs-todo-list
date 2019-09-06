@@ -1,12 +1,15 @@
 <template>
   <v-app>
-    <v-content
+    <v-container 
       class="fill-height"
-      style="margin: 40px"
       fluid
     >
-      <to-do-list />
-    </v-content>
+      <v-row>
+        <v-col cols="12">
+          <to-do-list />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 

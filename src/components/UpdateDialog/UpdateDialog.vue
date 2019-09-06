@@ -24,6 +24,11 @@
             label="Value"
             required
           />
+
+          <v-checkbox
+            v-model="formValue.isChecked"
+            label="Status"
+          />
         </v-form>
       </v-card-text>
 
